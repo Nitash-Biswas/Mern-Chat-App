@@ -5,7 +5,7 @@ import { useAuthContext } from "../../context/AuthContext";
 const LogoutButton = () => {
 	const { loading, logout } = useLogout();
 	const { authUser } = useAuthContext();
-	console.log(authUser);
+
 
 	return (
 		<div className='mt-auto'>

@@ -21,7 +21,6 @@ const MessageInput = () => {
   };
 
   const handleEmojiClick = (event, emojiObject) => {
-    console.log(emojiObject);
     setMessage(message + emojiObject.emoji);
   };
 
@@ -31,17 +30,18 @@ const MessageInput = () => {
       onSubmit={handleSubmit}
     >
       <div className="text-3xl relative">
-        <MdEmojiEmotions onClick={handleEmojiPickerhideShow} className="cursor-pointer hover:text-white" />
+        <MdEmojiEmotions
+          onClick={handleEmojiPickerhideShow}
+          className="cursor-pointer hover:text-white"
+        />
         {showEmojiPicker && (
           <Picker
             onEmojiClick={handleEmojiClick}
             pickerStyle={{
               position: "absolute",
               top: "-340px",
-
             }}
-			disableSearchBar
-
+            disableSearchBar
           />
         )}
       </div>
