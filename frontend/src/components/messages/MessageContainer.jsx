@@ -4,6 +4,7 @@ import MessageInput from "./MessageInput";
 import Messages from "./Messages";
 import { TbMessages } from "react-icons/tb";
 import { useAuthContext } from "../../context/AuthContext";
+import { FaCircleArrowLeft } from "react-icons/fa6";
 
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
@@ -14,18 +15,19 @@ const MessageContainer = () => {
   }, [setSelectedConversation]);
 
   return (
-    <div className="md:min-w-[450px] flex flex-col">
+    <div className={`w-full sm:flex ${selectedConversation ? 'flex' : 'hidden'} flex-col h-full flex-1`}>
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (
         <>
           {/* Header */}
           <div className="flex gap-2 items-center bg-slate-500 bg-opacity-40 px-4 py-2 mb-2">
-
+          <FaCircleArrowLeft className='w-7 h-7 text-gray-400 hover:text-white cursor-pointer sm:hidden' onClick={() => setSelectedConversation(null)} />
             <img  className="w-8 h-8 rounded-full" alt='Profile Pic' src={selectedConversation.profilePic} />
             <span className="text-white font-bold flex flex-1 flex-col">
               {selectedConversation.fullName}
             </span>
+
           </div>
           <Messages />
           <MessageInput />

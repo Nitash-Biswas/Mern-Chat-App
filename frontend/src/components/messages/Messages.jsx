@@ -3,6 +3,7 @@ import useGetMessages from "../../hooks/useGetMessages";
 import MessageSkeleton from "../skeletons/MessageSkeleton";
 import Message from "./Message";
 import useListenMessages from "../../hooks/useListenMessages";
+import { extractDate } from "../../utils/extractTime";
 
 const Messages = () => {
   const { messages, loading } = useGetMessages();
@@ -16,11 +17,21 @@ const Messages = () => {
   }, [messages]);
 
   return (
-    <div className="px-4 flex-1 overflow-auto" style={{ scrollbarWidth: "none" }}>
+    <div
+      className="px-4 flex-1 overflow-auto"
+      style={{ scrollbarWidth: "none" }}
+    >
       {!loading &&
         messages.length > 0 &&
-        messages.map((message) => (
+        messages.map((message, index) => (
           <div key={message._id} ref={lastMessageRef}>
+            {index === 0 ||
+            extractDate(message.createdAt) !==
+              extractDate(messages[index - 1].createdAt) ? (
+              <div className="divider opacity-50">
+                {extractDate(message.createdAt)}
+              </div>
+            ) : null}
             <Message message={message} />
           </div>
         ))}
